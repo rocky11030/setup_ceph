@@ -1,0 +1,53 @@
+---
+- name: install rados gateway
+  apt:
+    pkg: radosgw
+
+- name: create rados gateway directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "ceph"
+    group: "ceph"
+    mode: "0755"
+  with_items:
+    - /var/lib/ceph/bootstrap-rgw
+    - /var/lib/ceph/radosgw
+    - /var/lib/ceph/radosgw/{{ clustername }}-rgw.{{ ansible_hostname }}
+    - /var/run/ceph
+
+
+- name: create rados gateway keyring
+  command: ceph auth get-or-create client.rgw.{{ ansible_hostname }} osd 'allow rwx' mon 'allow rw' -o /var/lib/ceph/radosgw/{{ clustername }}-rgw.{{ ansible_hostname }}/keyring
+
+
+- name: set rados gateway key permissions (for or after the infernalis release)
+  file:
+    path: /var/lib/ceph/radosgw/{{ clustername }}-rgw.{{ ansible_hostname }}/keyring
+    mode: "0600"
+    owner: "ceph"
+    group: "ceph"
+
+
+- name: activate rados gateway with upstart
+  file:
+    path: /var/lib/ceph/radosgw/{{ clustername }}-rgw.{{ ansible_hostname }}/{{ item }}
+    state: touch
+    owner: "ceph"
+    group: "ceph"
+    mode: "0644"
+  with_items:
+    - done
+    - upstart
+
+- name: activate rados gateway with sysvinit
+  file:
+    path: /var/lib/ceph/radosgw/{{ clustername }}-rgw.{{ ansible_hostname }}/{{ item }}
+    state: touch
+    owner: "ceph"
+    group: "ceph"
+    mode: "0644"
+  with_items:
+    - done
+    - sysvinit
+

@@ -1,0 +1,58 @@
+---
+#- name: pull pub key
+#  authorized_key: user=root key="{{ lookup('file','/root/.ssh/id_rsa.pub')}}"
+
+- name: cleanner
+  script: clean.sh 
+  tags:
+    - cleaner
+#- name: copy ceph source files
+#  copy: src={{ item.src }} dest={{ item.dest }}
+#  with_items:
+#    - { src: 'mirrors_neunn_com_ceph_debian_jewel.list', dest: '/etc/apt/sources.list.d/mirrors_neunn_com_ceph_debian_jewel.list' }
+
+#- name: install the ceph repository stable key
+#  apt_key:
+#    data: "{{ lookup('file', role_path+'/files/cephstable.asc') }}"
+#    url: "http://mirrors.neunn.com/ceph/debian-jewel/key/release.asc"
+#    state: present
+
+
+
+#- name: remove i386
+#  shell: dpkg --remove-architecture i386
+
+#- name: software source update
+#  shell: apt-get update
+  
+#ignore_errors: true
+
+  
+#- name: software source update
+#  apt: update-cache=yes
+#  ignore_errors: true
+
+#- name: copy raidtools
+#  copy: src=storcli.deb dest=/root
+
+#- name: install raidtool
+#  command: dpkg -i /root/storcli.deb
+
+#- name: autoraid
+#  script: /etc/ansible/ceph-ansible-auto/roles/pre-action/files/autoraid.sh
+ 
+- name: install software
+  apt: name={{ item }} state=present force=yes
+  with_items:
+             - ceph
+             - ceph-common
+             - ceph-mds
+             - ifenslave-2.6 
+             - iftop
+             - sysv-rc-conf
+             - sysstat 
+             - biosdevname  
+             - xfsprogs 
+             - smartmontools
+- name: solved disk disorder--reboot
+  command: reboot

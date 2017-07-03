@@ -1,0 +1,5 @@
+---
+- hosts: ceph_mon,ceph_osd
+  user: root
+  roles:
+    - ceph_pre_action

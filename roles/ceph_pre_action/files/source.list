@@ -1,0 +1,10 @@
+deb http://10.2.13.150/ubuntu/ trusty main restricted universe multiverse
+deb http://10.2.13.150/ubuntu/ trusty-security main restricted universe multiverse
+deb http://10.2.13.150/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://10.2.13.150/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://10.2.13.150/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://10.2.13.150/ubuntu/ trusty main restricted universe multiverse
+deb-src http://10.2.13.150/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://10.2.13.150/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://10.2.13.150/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://10.2.13.150/ubuntu/ trusty-backports main restricted universe multiverse

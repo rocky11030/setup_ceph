@@ -1,0 +1,8 @@
+---
+- hosts: ceph_mon
+  user: root
+#  vars_files:
+#    - group_vars/ceph_vars
+  roles:
+    - add_ceph_mon
+

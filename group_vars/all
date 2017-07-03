@@ -1,0 +1,12 @@
+clustername: ceph
+mon1: B-OPS-131-9
+mon2: B-OPS-131-10
+mon3: B-OPS-131-11
+mon1ipaddr: 172.20.79.9
+mon2ipaddr: 172.20.79.10
+mon3ipaddr: 172.20.79.11
+#通过uuidgen在ceph节点生成即可
+fsid: 08ac6356-1cc1-43ef-8e7f-ee771ecb5cc9
+
+#rgw
+radosgw_nss_db_path: /var/lib/ceph/radosgw/ceph-radosgw.{{ ansible_hostname }}/nss

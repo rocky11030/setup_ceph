@@ -1,0 +1,32 @@
+  - name: copy config files
+    template: src=ceph.conf dest=/etc/ceph/ceph.conf
+
+  - name: disk-clean
+    command: ceph-disk zap {{ item }}
+    with_items:
+               - /dev/sdb
+               - /dev/sdc
+               - /dev/sdd
+               - /dev/sde
+               - /dev/sdf
+               - /dev/sdg
+
+  - name: prepare
+    command: ceph-disk prepare --cluster {{ clustername }} --cluster-uuid {{ fsid }} --fs-type xfs {{ item }} /dev/sdb
+    with_items:
+               - /dev/sdc
+               - /dev/sdd
+               - /dev/sde
+               - /dev/sdf
+               - /dev/sdg  
+
+  - name: active
+    command: ceph-disk activate {{ item }}
+    with_items:
+               - /dev/sdc1
+               - /dev/sdd1
+               - /dev/sde1
+               - /dev/sdf1
+               - /dev/sdg1    
+    tags:
+      - active-ceph-osd 

@@ -1,0 +1,12 @@
+---
+#- name: modify source.list
+#  copy: src=source.list dest=/etc/apt/sources.list
+
+#- name: update source
+#  shell: apt-get update
+   
+- include: mon_install.yml
+  when: "'ceph_mon' in group_names"
+
+- include: osd_install.yml
+  when: "'ceph_osd' in group_names"
