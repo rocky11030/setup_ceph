@@ -1,4 +1,13 @@
 ---
 - include: pre_install.yml
+  when: inventory_hostname in groups['ceph_rgw']
 - include: openstack_keystone.yml
+  when: inventory_hostname in groups['ceph_rgw']
 - include: configure.yml
+  when: inventory_hostname in groups['ceph_rgw']
+  tags:
+    - config
+- include: service_add.yml
+  when: inventory_hostname == "{{ groups['control'][0] }}"
+  tags:
+    - service_add

@@ -1,41 +1,12 @@
 [ceph_mon]
-10.126.0.9 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-10.126.0.10 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-10.126.0.11 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-
-#10.8.46.1 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.2 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.3 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+10.9.40.[6:8] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
 
 [ceph_osd]
-10.126.0.6 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-10.126.0.7 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-10.126.0.8 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+10.9.40.[6:12] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+10.9.41.[6:12] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
 
+[ceph_rgw]
+10.9.40.6 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
 
-
-#10.8.46.1 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.2 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.3 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.4 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.5 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.6 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.7 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.8 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.9 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.10 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.11 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.46.12 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#
-#10.8.47.1 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.2 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.3 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.4 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.5 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.6 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.7 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.8 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.9 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.10 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.11 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-#10.8.47.12 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+[control]
+10.9.40.1 ansible_ssh_user=root ansible_ssh_pass=Neunn2016

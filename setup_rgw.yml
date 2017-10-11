@@ -1,5 +1,5 @@
 ---
-- hosts: ceph_rgw
+- hosts: ceph_rgw,control
   user: root
 #  vars_files:
 #    - ../group_vars/ceph_vars

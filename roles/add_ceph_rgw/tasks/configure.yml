@@ -1,6 +1,6 @@
 ---
-#- name: copy ceph.conf
-#  template: src=ceph.conf dest=/etc/ceph/ceph.conf
+- name: copy ceph.conf
+  template: src=ceph.conf dest=/etc/ceph/ceph.conf
 
 #- name: create admin user
 #  shell: radosgw-admin user create --uid=admin --display-name="admin user" && radosgw-admin caps add --uid=admin --caps="users=*;buckets=*;metadata=*;usage=*;zone=*"
@@ -17,21 +17,37 @@
 - name: restart apache2 service
   service: name=apache2 state=restarted
 
+- name: copy rgw.conf s3gw.fcg
+  template: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: 'rgw.conf', dest: '/etc/apache2/sites-available/rgw.conf' }
+    - { src: 's3gw.fcgi', dest: '/var/www/s3gw.fcgi' }
+
 - name: load rewrite fastcgi ssl mode
   shell: sudo a2enmod rewrite && sudo a2enmod fastcgi && sudo a2enmod ssl && sudo a2enmod headers && sudo a2ensite rgw.conf && sudo a2dissite 000-default.conf
 
 - name: mkdir ssl directory
   file: path=/etc/apache2/ssl state=directory
 
-#这个是交互是的暂时需要手动执行
-- name: create apache.crt
-  shell: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
+- name: 安装expect
+  apt: name=expect state=present
+  tags:
+    - exec_expect
 
-- name: copy rgw.conf s3gw.fcg
-  template: src={{ item.src }} dest={{ item.dest }}
-  with_items:
-    - { src: 'rgw.conf', dest: '/etc/apache2/sites-available/rgw.conf' }
-    - { src: 's3gw.fcgi', dest: '/var/www/s3gw.fcgi' }
+#- name: 拷贝apache_crt脚本
+#  copy: src=apache_crt.sh dest=/tmp/apache_crt.sh mode=0755
+#  tags:
+#    - exec_expect
+
+- name: create apache.crt
+  #shell: /tmp/apache_crt.sh
+  script: apache_crt.sh
+  tags:
+    - exec_expect
+
+#这个是交互是的暂时需要手动执行,上面用expect已经手动执行了
+#- name: create apache.crt
+#  shell: sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
 
 - name: to fcgi privileges
   shell: chown www-data:www-data /var/www/s3gw.fcgi && chmod +x /var/www/s3gw.fcgi

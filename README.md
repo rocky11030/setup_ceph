@@ -29,10 +29,6 @@
 第三步: 安装rgw对象存储
 --------------
 
-* inventory: rgw_hosts，先编辑rgw_hosts的主机变量
-* 创建apache.crt需要交互操作，可能会报错，需要手动执行
-* 然后执行: ansible-playbook -i rgw_hosts setup_rgw.yml
-* 生成证书，按多次回车确认
-sudo mkdir /etc/apache2/ssl 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt
-* 注意这段脚本还没验证过，而且rgw和portal连接部分还没编写
+* inventory: 先编辑hosts里面的ceph_rgw的主机变量
+* 然后执行: ansible-playbook -i hosts setup_rgw.yml
+* 执行完这步，才能执行setup-portal的roles

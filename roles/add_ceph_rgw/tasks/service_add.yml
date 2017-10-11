@@ -1,0 +1,34 @@
+---
+#create swift user and add swift role
+- name: create swift user
+  shell: openstack user create --domain default swift --password {{ swift_service_password }}
+  environment:
+    OS_TOKEN: "{{ admin_token }}"
+    OS_URL: http://{{ virtual_ip }}:35357/v3
+    OS_IDENTITY_API_VERSION: 3
+
+- name: add swift role
+  shell: openstack role add --project service --user swift admin
+  environment:
+    OS_TOKEN: "{{ admin_token }}"
+    OS_URL: http://{{ virtual_ip }}:35357/v3
+    OS_IDENTITY_API_VERSION: 3
+
+
+#create swift service and create swift endpoint
+- name: create swift service
+  shell: openstack service create --name swift --description "OpenStack Swift service" object-store
+  environment:
+    OS_TOKEN: "{{ admin_token }}"
+    OS_URL: http://{{ virtual_ip }}:35357/v3
+    OS_IDENTITY_API_VERSION: 3
+
+- name: create swift endpoint
+  shell: openstack endpoint create --region RegionOne object-store {{ item.key }} http://{{ virtual_ip }}:{{ item.value.port }}/swift/v1
+  with_dict: "{{ swift_endpoints }}"
+  environment:
+    OS_TOKEN: "{{ admin_token }}"
+    OS_URL: http://{{ virtual_ip }}:35357/v3
+    OS_IDENTITY_API_VERSION: 3
+  tags:
+    - endpoint
