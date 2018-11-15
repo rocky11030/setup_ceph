@@ -1,0 +1,12 @@
+---
+import_task: mon-osd-pre.yml
+
+import_task: mon-install.yml
+when: "'ceph_mon' in group_names"
+
+
+import_task: osd-install.yml
+when: "'ceph_osd' in group_names"
+
+#- name: remove osd
+#  script: handers/remosd.sh

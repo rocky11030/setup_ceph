@@ -1,12 +1,12 @@
 [ceph_mon]
-10.9.40.[6:8] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+10.27.0.119 ansible_ssh_user=root ansible_ssh_pass=***
+10.27.0.120 ansible_ssh_user=root ansible_ssh_pass=***
+10.27.0.121 ansible_ssh_user=root ansible_ssh_pass=***
 
 [ceph_osd]
-10.9.40.[6:12] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-10.9.41.[6:12] ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+10.27.0.119 ansible_ssh_user=root ansible_ssh_pass=***
+10.27.0.120 ansible_ssh_user=root ansible_ssh_pass=***
+10.27.0.121 ansible_ssh_user=root ansible_ssh_pass=***
 
 [ceph_rgw]
-10.9.40.6 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
-
-[control]
-10.9.40.1 ansible_ssh_user=root ansible_ssh_pass=Neunn2016
+#10.9.40.6 ansible_ssh_user=root ansible_ssh_pass=

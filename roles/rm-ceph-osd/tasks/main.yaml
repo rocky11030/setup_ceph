@@ -1,3 +1,0 @@
-
-- name: rmove osd
-  script: handlers/rmosd.sh

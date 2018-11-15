@@ -1,4 +1,0 @@
----
-- include: add_ceph_mon.yml
-- include: add_ceph_osd.yml
-

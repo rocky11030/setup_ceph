@@ -1,0 +1,26 @@
+- name: copy configuration
+  template: src=ceph.conf dest=/etc/ceph/ceph.conf
+
+- name: Create monitor initial keyring.
+  command: ceph-authtool --create-keyring /var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }}  --cap mon 'allow *'
+
+- name: Set initial monitor key permissions.
+  file: path=/var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} mode=0600 owner=ceph group=ceph
+
+- name: create mon directory
+  file: path=/var/lib/ceph/mon/{{ clustername }}-{{ ansible_hostname }}  state=directory owner=ceph group=ceph mode=755
+
+- name: mon initial
+  command: ceph-mon --cluster {{ clustername }} --setuser ceph --setgroup ceph --mkfs -i {{ ansible_hostname }} --keyring /var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} creates=/var/lib/ceph/mon/ceph-{{ ansible_hostname }}/keyring
+
+- name: autostart mon flag
+  file: path=/var/lib/ceph/mon/{{ clustername }}-{{ ansible_hostname }}/{{ item }} state=touch owner=ceph group=ceph mode=644
+  with_items:
+             - done
+             #- upstart
+             - sysvinit
+
+- name: start mon deamon
+  command: start ceph-mon id={{ ansible_hostname }} 
+  tags:
+    - start_ceph_mon

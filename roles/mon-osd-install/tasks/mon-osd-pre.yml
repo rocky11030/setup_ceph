@@ -1,0 +1,39 @@
+---
+- name: copy hosts
+  copy: src=hosts dest=/etc/hosts
+
+#- name: cleanner
+#  script: clean.sh 
+#  tags:
+#    - cleaner
+
+- name: copy ali source
+  copy: src=sources.list dest=/etc/apt/sources.list
+
+- name: update source
+  shell: apt-get update
+
+
+- name: add release.key
+  shell: wget -q -O- 'https://download.ceph.com/keys/autobuild.asc' | apt-key add -
+
+- name: add ceph source
+  shell: echo deb http://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
+
+- name: update ceph source
+  shell: apt-get update
+
+#安装jewel版本官方下载特别慢,建议下载一个以后做成本地源
+- name: install software
+  apt: name={{ item }} state=present force=yes
+  with_items:
+             - ceph
+#             - ceph-common
+#             - ceph-mds
+#             - ifenslave-2.6 
+#             - iftop
+#             - sysv-rc-conf
+#             - sysstat 
+#             - biosdevname  
+#             - xfsprogs 
+#             - smartmontools

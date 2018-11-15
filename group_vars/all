@@ -1,34 +1,33 @@
 clustername: ceph
-mon1: C-OPS-40-6
-mon2: C-OPS-40-7
-mon3: C-OPS-40.8
-mon1ipaddr: 172.20.140.6
-mon2ipaddr: 172.20.140.7
-mon3ipaddr: 172.20.140.8
+mon1: m1
+mon2: m2
+mon3: m3
+mon1ipaddr: 192.168.20.135
+mon2ipaddr: 192.168.20.136
+mon3ipaddr: 192.168.20.137
 #通过uuidgen在ceph节点生成即可
-fsid: df0c68cd-2c1b-4d28-a0c3-264b8fcf1d81
+fsid: f54c87a3-79e5-4ba3-8751-d3dfdcbcf26e
 
 #rgw
-radosgw_nss_db_path: /var/lib/ceph/radosgw/ceph-radosgw.{{ ansible_hostname }}/nss
+#radosgw_nss_db_path: /var/lib/ceph/radosgw/ceph-radosgw.{{ ansible_hostname }}/nss
 
 #portal
-portal_ip: 10.9.40.9
+#portal_ip: 10.9.40.9
 
 
 #keystone
-keystone_admin_user: admin
-keystone_admin_password: Neunn2017@)!&
+#keystone_admin_user: admin
+#keystone_admin_password: ***
 
 
 #service_register
-admin_token: openstack2017
-virtual_ip: 10.9.40.200
-swift_service_password: "swift@2016"
-swift_endpoints:
-  internal:
-    port: 8080
-  public:
-    port: 8080
-  admin:
-    port: 8080
-
+#admin_token: openstack2017
+#virtual_ip: 10.9.40.200
+#swift_service_password: "swift@2016"
+#swift_endpoints:
+#  internal:
+#    port: 8080
+#  public:
+#    port: 8080
+#  admin:
+#    port: 8080
